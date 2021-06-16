@@ -1,0 +1,34 @@
+databaseChangeLog:
+  - changeSet:
+      id: changelog-create-table-books
+      author: liquibase
+      preConditions:
+        - onFail: MARK_RAN
+          not:
+            tableExists:
+              tableName: books
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: user_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: title
+                  type: ${textColumnType}
+              - column:
+                  constraints:
+                    nullable: false
+                  name: description
+                  type: ${textColumnType}
+              - column:
+                  name: status_published
+                  type: ${binaryColumnType}
+            tableName: books

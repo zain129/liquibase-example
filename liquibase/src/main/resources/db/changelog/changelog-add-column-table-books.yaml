@@ -1,0 +1,18 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-column-table-books
+      author: liquibase
+      preConditions:
+        - onFail: MARK_RAN
+          not:
+            tableExists:
+              tableName: books
+      changes:
+        - addColumn:
+            - columns:
+                name: author
+                type: ${textColumnType}
+                constraints:
+                  nullable: false
+            tableName: books
+
